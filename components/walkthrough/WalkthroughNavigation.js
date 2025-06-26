@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import { ChevronRight, ChevronDown, MapPin, Clock, Star } from 'lucide-react';
+import WalkthroughDetail from './WalkthroughDetail';
 
 export default function WalkthroughNavigation() {
   const [expandedSections, setExpandedSections] = useState({});
+  const [selectedSection, setSelectedSection] = useState(null);
 
   const walkthroughSections = [
     {
@@ -24,14 +26,15 @@ export default function WalkthroughNavigation() {
     },
     {
       id: 'mid-game',
-      title: 'Mid Game (Liurnia & Caelid)',
-      description: 'Expanding your exploration',
+      title: 'Mid Game (Liurnia & Weeping Peninsula)',
+      description: 'Expanding your exploration to new regions',
       estimatedTime: '15-20 hours',
       difficulty: 'Intermediate',
       steps: [
         { id: 'liurnia-entry', title: 'Entering Liurnia of the Lakes', completed: false },
         { id: 'raya-lucaria', title: 'Raya Lucaria Academy', completed: false },
         { id: 'rennala', title: 'Rennala, Queen of the Full Moon', completed: false },
+        { id: 'weeping-peninsula', title: 'Weeping Peninsula Exploration', completed: false },
         { id: 'caelid-basics', title: 'Surviving Early Caelid', completed: false },
         { id: 'radahn', title: 'Starscourge Radahn Festival', completed: false },
       ],
@@ -76,6 +79,14 @@ export default function WalkthroughNavigation() {
     }));
   };
 
+  const handleStepClick = (stepId) => {
+    setSelectedSection(stepId);
+  };
+
+  const handleBackToNavigation = () => {
+    setSelectedSection(null);
+  };
+
   const getDifficultyColor = (difficulty) => {
     const colors = {
       Beginner: 'text-green-400',
@@ -95,6 +106,16 @@ export default function WalkthroughNavigation() {
     };
     return colors[difficulty] || colors.Beginner;
   };
+
+  // If a section is selected, show the detailed view
+  if (selectedSection) {
+    return (
+      <WalkthroughDetail 
+        sectionId={selectedSection} 
+        onBack={handleBackToNavigation}
+      />
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -165,11 +186,12 @@ export default function WalkthroughNavigation() {
                 <div className="border-t border-elden-600/30 p-6">
                   <div className="space-y-3">
                     {section.steps.map((step, index) => (
-                      <div
+                      <button
                         key={step.id}
-                        className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all ${
+                        onClick={() => handleStepClick(step.id)}
+                        className={`w-full flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all ${
                           step.completed 
-                            ? 'bg-green-500/10 border border-green-500/20' 
+                            ? 'bg-green-500/10 border border-green-500/20 hover:bg-green-500/20' 
                             : 'bg-elden-800/20 hover:bg-elden-800/40 border border-elden-600/30'
                         }`}
                       >
@@ -180,7 +202,7 @@ export default function WalkthroughNavigation() {
                         }`}>
                           {step.completed ? '✓' : index + 1}
                         </div>
-                        <span className={`flex-1 ${
+                        <span className={`flex-1 text-left ${
                           step.completed ? 'text-green-400' : 'text-white'
                         }`}>
                           {step.title}
@@ -188,7 +210,7 @@ export default function WalkthroughNavigation() {
                         {step.completed && (
                           <Star className="w-4 h-4 text-yellow-400" />
                         )}
-                      </div>
+                      </button>
                     ))}
                   </div>
                 </div>
