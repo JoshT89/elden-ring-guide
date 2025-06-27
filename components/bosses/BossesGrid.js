@@ -1,87 +1,9 @@
 import Link from 'next/link';
 import { Sword, Shield, Star, Zap } from 'lucide-react';
+import { bossData } from '@/lib/data/bossData';
 
 export default function BossesGrid() {
-  const bosses = [
-    {
-      id: 'margit',
-      name: 'Margit, the Fell Omen',
-      title: 'First Legacy Boss',
-      difficulty: 'Beginner',
-      location: 'Stormveil Castle',
-      level: '20-25',
-      type: 'Legacy Boss',
-      rewards: ['Talisman Pouch', '12,000 Runes'],
-      weaknesses: ['Strike Damage', 'Bleed'],
-      image: 'https://images.pexels.com/photos/163064/play-stone-the-dove-ancient-163064.jpeg?auto=compress&cs=tinysrgb&w=600',
-      expansion: 'Base Game',
-    },
-    {
-      id: 'godrick',
-      name: 'Godrick the Grafted',
-      title: 'Lord of Limgrave',
-      difficulty: 'Beginner',
-      location: 'Stormveil Castle',
-      level: '30-35',
-      type: 'Demigod',
-      rewards: ['Godrick\'s Great Rune', '20,000 Runes', 'Remembrance of the Grafted'],
-      weaknesses: ['Slash Damage', 'Fire'],
-      image: 'https://images.pexels.com/photos/1624438/pexels-photo-1624438.jpeg?auto=compress&cs=tinysrgb&w=600',
-      expansion: 'Base Game',
-    },
-    {
-      id: 'rennala',
-      name: 'Rennala, Queen of the Full Moon',
-      title: 'Queen of the Academy',
-      difficulty: 'Intermediate',
-      location: 'Raya Lucaria Academy',
-      level: '40-50',
-      type: 'Demigod',
-      rewards: ['Rennala\'s Great Rune', '40,000 Runes', 'Remembrance of the Full Moon Queen'],
-      weaknesses: ['Physical Damage', 'Bleed'],
-      image: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600',
-      expansion: 'Base Game',
-    },
-    {
-      id: 'radahn',
-      name: 'Starscourge Radahn',
-      title: 'The Starscourge General',
-      difficulty: 'Advanced',
-      location: 'Redmane Castle',
-      level: '60-70',
-      type: 'Demigod',
-      rewards: ['Radahn\'s Great Rune', '70,000 Runes', 'Remembrance of the Starscourge'],
-      weaknesses: ['Rot', 'Bleed'],
-      image: 'https://images.pexels.com/photos/2832432/pexels-photo-2832432.jpeg?auto=compress&cs=tinysrgb&w=600',
-      expansion: 'Base Game',
-    },
-    {
-      id: 'morgott',
-      name: 'Morgott, the Omen King',
-      title: 'King of Leyndell',
-      difficulty: 'Advanced',
-      location: 'Leyndell, Royal Capital',
-      level: '80-90',
-      type: 'Demigod',
-      rewards: ['Morgott\'s Great Rune', '120,000 Runes', 'Remembrance of the Omen King'],
-      weaknesses: ['Slash Damage', 'Bleed'],
-      image: 'https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&w=600',
-      expansion: 'Base Game',
-    },
-    {
-      id: 'messmer',
-      name: 'Messmer the Impaler',
-      title: 'The Impaler',
-      difficulty: 'Expert',
-      location: 'Shadow Keep',
-      level: '100-120',
-      type: 'Shadow Boss',
-      rewards: ['Messmer\'s Kindling', '200,000 Runes', 'Remembrance of the Impaler'],
-      weaknesses: ['Holy Damage', 'Frostbite'],
-      image: 'https://images.pexels.com/photos/1438761/pexels-photo-1438761.jpeg?auto=compress&cs=tinysrgb&w=600',
-      expansion: 'Shadow of the Erdtree',
-    },
-  ];
+  const bosses = bossData;
 
   const getDifficultyColor = (difficulty) => {
     const colors = {
@@ -139,7 +61,7 @@ export default function BossesGrid() {
             <div className="relative">
               <div className="aspect-video overflow-hidden">
                 <img
-                  src={boss.image}
+                  src={boss.image || 'https://images.pexels.com/photos/163064/play-stone-the-dove-ancient-163064.jpeg?auto=compress&cs=tinysrgb&w=600'}
                   alt={boss.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
@@ -206,7 +128,7 @@ export default function BossesGrid() {
                       key={index}
                       className="text-xs px-2 py-1 bg-erdtree-600/20 text-erdtree-400 rounded"
                     >
-                      {reward}
+                      {typeof reward === 'string' ? reward : reward.name}
                     </span>
                   ))}
                   {boss.rewards.length > 2 && (

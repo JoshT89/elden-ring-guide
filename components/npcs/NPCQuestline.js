@@ -858,6 +858,636 @@ export default function NPCQuestline({ npcId }) {
     }
   ];
 
+  // Questline data for Dung Eater
+  const dungEaterQuestline = [
+    {
+      step: 1,
+      title: "First Meeting",
+      location: "Roundtable Hold",
+      description: "Meet Dung Eater at the Roundtable Hold",
+      details: [
+        "Dung Eater is found in the Roundtable Hold after defeating Godrick",
+        "He's a mysterious and disturbing figure",
+        "He speaks of curses and defilement",
+        "He's imprisoned but can be spoken to through the bars"
+      ],
+      rewards: ["Dung Eater's introduction", "Access to his questline", "Understanding of his nature"]
+    },
+    {
+      step: 2,
+      title: "Seedbed Curse",
+      location: "Various locations",
+      description: "Collect Seedbed Curses for Dung Eater",
+      details: [
+        "Dung Eater asks you to collect Seedbed Curses",
+        "These can be found in various locations throughout the Lands Between",
+        "Each curse represents a victim of Dung Eater's defilement",
+        "This reveals the extent of his crimes and influence"
+      ],
+      rewards: ["Seedbed Curses", "Understanding of Dung Eater's crimes", "Progress in questline"]
+    },
+    {
+      step: 3,
+      title: "Dung Eater's Release",
+      location: "Roundtable Hold",
+      description: "Free Dung Eater from his prison",
+      details: [
+        "After collecting enough Seedbed Curses, Dung Eater can be freed",
+        "This requires the Sewer Gaol Key",
+        "He will leave the Roundtable Hold",
+        "This sets in motion the next phase of his questline"
+      ],
+      rewards: ["Dung Eater's freedom", "Access to his next location", "Quest progression"]
+    },
+    {
+      step: 4,
+      title: "Leyndell Sewers",
+      location: "Leyndell Sewers",
+      description: "Find Dung Eater in the sewers",
+      details: [
+        "Dung Eater can be found in the Leyndell Sewers",
+        "He's in a hidden area accessible through the sewers",
+        "He's continuing his work of defilement",
+        "This reveals more about his methods and goals"
+      ],
+      rewards: ["Dung Eater's location", "Understanding of his methods", "Access to his services"]
+    },
+    {
+      step: 5,
+      title: "Dung Eater's Request",
+      location: "Leyndell Sewers",
+      description: "Help Dung Eater with his ultimate goal",
+      details: [
+        "Dung Eater asks for your help with his final plan",
+        "He wants to spread his curse throughout the Lands Between",
+        "This involves a complex ritual and specific items",
+        "He reveals his philosophy about defilement and curses"
+      ],
+      rewards: ["Dung Eater's trust", "Understanding of his philosophy", "Access to his ritual"]
+    },
+    {
+      step: 6,
+      title: "The Defilement Ritual",
+      location: "Various locations",
+      description: "Complete Dung Eater's ritual",
+      details: [
+        "Dung Eater's ritual requires specific steps and items",
+        "This involves visiting certain locations and performing actions",
+        "The ritual is designed to spread his curse",
+        "This represents the culmination of his questline"
+      ],
+      rewards: ["Ritual completion", "Dung Eater's curse", "Access to his ending"]
+    },
+    {
+      step: 7,
+      title: "Age of Despair Ending",
+      location: "Elden Throne",
+      description: "Achieve the Age of Despair ending",
+      details: [
+        "Completing Dung Eater's questline unlocks the Age of Despair ending",
+        "This is one of the darkest endings in the game",
+        "It represents the spread of Dung Eater's curse",
+        "The world is plunged into eternal defilement"
+      ],
+      rewards: ["Age of Despair Ending", "Mending Rune of the Fell Curse", "Complete questline"]
+    }
+  ];
+
+  // Questline data for Fia, Deathbed Companion
+  const fiaQuestline = [
+    {
+      step: 1,
+      title: "First Meeting",
+      location: "Roundtable Hold",
+      description: "Meet Fia in the Roundtable Hold bedroom",
+      details: [
+        "Fia is found in the bedroom of the Roundtable Hold",
+        "She offers to hold you and provide comfort",
+        "She speaks of death and the role of Deathbed Companions",
+        "She's mysterious and speaks in cryptic terms"
+      ],
+      rewards: ["Fia's embrace", "Blessing of Death", "Understanding of Deathbed Companions"]
+    },
+    {
+      step: 2,
+      title: "Fia's Embrace",
+      location: "Roundtable Hold",
+      description: "Accept Fia's embrace and learn about death",
+      details: [
+        "Fia offers to hold you whenever you visit",
+        "Each embrace provides a temporary debuff but also benefits",
+        "She explains her role in the cycle of death and rebirth",
+        "This establishes the connection between you and Fia"
+      ],
+      rewards: ["Fia's blessing", "Understanding of death mechanics", "Character development"]
+    },
+    {
+      step: 3,
+      title: "D, Hunter of the Dead",
+      location: "Roundtable Hold",
+      description: "Interact with D, Hunter of the Dead",
+      details: [
+        "D, Hunter of the Dead is found in the Roundtable Hold",
+        "He's opposed to Fia and her practices",
+        "This creates tension and conflict in the storyline",
+        "D represents the forces that oppose death and defilement"
+      ],
+      rewards: ["Understanding of D's role", "Conflict in storyline", "Character dynamics"]
+    },
+    {
+      step: 4,
+      title: "Fia's Request",
+      location: "Roundtable Hold",
+      description: "Help Fia with her quest",
+      details: [
+        "Fia asks for your help with a specific task",
+        "She needs you to find something related to death",
+        "This involves exploring specific areas",
+        "She reveals more about her true nature and goals"
+      ],
+      rewards: ["Fia's trust", "Understanding of her goals", "Quest progression"]
+    },
+    {
+      step: 5,
+      title: "Deeproot Depths",
+      location: "Deeproot Depths",
+      description: "Find Fia in the Deeproot Depths",
+      details: [
+        "Fia can be found in the Deeproot Depths",
+        "She's near the Prince of Death",
+        "This reveals her connection to death and the undead",
+        "She's working on something related to the Prince of Death"
+      ],
+      rewards: ["Fia's location", "Understanding of Prince of Death", "Story progression"]
+    },
+    {
+      step: 6,
+      title: "The Prince of Death",
+      location: "Deeproot Depths",
+      description: "Help Fia with the Prince of Death",
+      details: [
+        "Fia is working with the Prince of Death",
+        "She needs your help to complete a ritual",
+        "This involves specific items and actions",
+        "The ritual is related to death and rebirth"
+      ],
+      rewards: ["Ritual completion", "Understanding of death mechanics", "Fia's gratitude"]
+    },
+    {
+      step: 7,
+      title: "Age of Duskborn Ending",
+      location: "Elden Throne",
+      description: "Achieve the Age of Duskborn ending",
+      details: [
+        "Completing Fia's questline unlocks the Age of Duskborn ending",
+        "This ending involves death and rebirth",
+        "It represents a different approach to the world's problems",
+        "The world is changed through death rather than life"
+      ],
+      rewards: ["Age of Duskborn Ending", "Mending Rune of the Death-Prince", "Complete questline"]
+    }
+  ];
+
+  // Questline data for Knight Bernahl
+  const bernahlQuestline = [
+    {
+      step: 1,
+      title: "First Meeting",
+      location: "Warmaster's Shack, Limgrave",
+      description: "Meet Knight Bernahl at Warmaster's Shack",
+      details: [
+        "Bernahl is found at Warmaster's Shack in Limgrave",
+        "He's a former knight who now serves as a merchant",
+        "He sells Ashes of War and provides combat advice",
+        "He's friendly and helpful to Tarnished warriors"
+      ],
+      rewards: ["Access to Ashes of War", "Bernahl's merchant services", "Combat advice"]
+    },
+    {
+      step: 2,
+      title: "Volcano Manor Invitation",
+      location: "Warmaster's Shack, Limgrave",
+      description: "Receive invitation to Volcano Manor",
+      details: [
+        "After progressing through the game, Bernahl receives an invitation",
+        "He's invited to join Volcano Manor as a Recusant",
+        "He explains the nature of Recusants and their mission",
+        "He offers to help you understand the Volcano Manor questline"
+      ],
+      rewards: ["Understanding of Recusants", "Access to Volcano Manor", "Bernahl's guidance"]
+    },
+    {
+      step: 3,
+      title: "Volcano Manor",
+      location: "Volcano Manor, Mt. Gelmir",
+      description: "Meet Bernahl at Volcano Manor",
+      details: [
+        "Bernahl appears at Volcano Manor after joining",
+        "He's now a Recusant working for Lady Tanith",
+        "He participates in the assassination contracts",
+        "He maintains his friendly demeanor despite his new role"
+      ],
+      rewards: ["Bernahl's continued friendship", "Access to assassination contracts", "Volcano Manor services"]
+    },
+    {
+      step: 4,
+      title: "Assassination Contracts",
+      location: "Volcano Manor, Mt. Gelmir",
+      description: "Work alongside Bernahl on contracts",
+      details: [
+        "Bernahl participates in the same assassination contracts as you",
+        "He provides advice and support during the missions",
+        "He explains the philosophy behind the Recusants",
+        "He's conflicted about his role but committed to the cause"
+      ],
+      rewards: ["Bernahl's assistance", "Understanding of Recusant philosophy", "Contract completion"]
+    },
+    {
+      step: 5,
+      title: "Bernahl's Departure",
+      location: "Volcano Manor, Mt. Gelmir",
+      description: "Bernahl leaves Volcano Manor",
+      details: [
+        "After completing the contracts, Bernahl leaves Volcano Manor",
+        "He's disillusioned with the Recusant path",
+        "He returns to his original location at Warmaster's Shack",
+        "He continues to provide his merchant services"
+      ],
+      rewards: ["Bernahl's return", "Continued merchant services", "Character development"]
+    },
+    {
+      step: 6,
+      title: "Final Encounter",
+      location: "Crumbling Farum Azula",
+      description: "Final meeting with Bernahl",
+      details: [
+        "Bernahl can be found in Crumbling Farum Azula",
+        "He's there for his own reasons, not as a Recusant",
+        "He may become hostile depending on your choices",
+        "This represents the end of his character arc"
+      ],
+      rewards: ["Bernahl's Armor Set", "Devourer's Scepter", "Blasphemous Claw"]
+    }
+  ];
+
+  // Questline data for Lady Tanith
+  const tanithQuestline = [
+    {
+      step: 1,
+      title: "First Meeting",
+      location: "Volcano Manor, Mt. Gelmir",
+      description: "Meet Lady Tanith at Volcano Manor",
+      details: [
+        "Lady Tanith is the leader of Volcano Manor",
+        "She's elegant and mysterious, with a commanding presence",
+        "She explains the purpose of Volcano Manor and the Recusants",
+        "She offers you the opportunity to join their cause"
+      ],
+      rewards: ["Access to Volcano Manor", "Understanding of Recusants", "Lady Tanith's guidance"]
+    },
+    {
+      step: 2,
+      title: "Recusant Initiation",
+      location: "Volcano Manor, Mt. Gelmir",
+      description: "Become a Recusant under Lady Tanith",
+      details: [
+        "Lady Tanith initiates you into the Recusants",
+        "She explains the philosophy of defying the Erdtree",
+        "She gives you the Recusant Finger for invasions",
+        "She assigns you your first assassination contract"
+      ],
+      rewards: ["Recusant Finger", "First assassination contract", "Recusant status"]
+    },
+    {
+      step: 3,
+      title: "Assassination Contracts",
+      location: "Volcano Manor, Mt. Gelmir",
+      description: "Complete contracts for Lady Tanith",
+      details: [
+        "Lady Tanith assigns you multiple assassination contracts",
+        "Each contract targets a specific Tarnished",
+        "She provides guidance and rewards for completion",
+        "She explains the deeper meaning behind the contracts"
+      ],
+      rewards: ["Contract rewards", "Lady Tanith's approval", "Recusant progression"]
+    },
+    {
+      step: 4,
+      title: "Rykard's Revelation",
+      location: "Volcano Manor, Mt. Gelmir",
+      description: "Learn about Rykard and the true purpose",
+      details: [
+        "Lady Tanith reveals the connection to Rykard, Lord of Blasphemy",
+        "She explains the true purpose of the Recusants",
+        "She reveals her loyalty to Rykard and his goals",
+        "This changes the nature of your relationship with her"
+      ],
+      rewards: ["Understanding of Rykard", "Lady Tanith's true nature", "Story progression"]
+    },
+    {
+      step: 5,
+      title: "The God-Devouring Serpent",
+      location: "Volcano Manor, Mt. Gelmir",
+      description: "Confront Rykard with Lady Tanith",
+      details: [
+        "Lady Tanith leads you to Rykard's chamber",
+        "She's present during the confrontation with Rykard",
+        "She may assist or oppose you depending on your choices",
+        "This represents a crucial moment in her questline"
+      ],
+      rewards: ["Rykard's defeat", "Lady Tanith's fate", "Volcano Manor resolution"]
+    },
+    {
+      step: 6,
+      title: "Lady Tanith's Fate",
+      location: "Volcano Manor, Mt. Gelmir",
+      description: "Lady Tanith's ultimate fate",
+      details: [
+        "After Rykard's defeat, Lady Tanith's fate is determined",
+        "She may mourn Rykard or continue her own path",
+        "Her story represents loyalty and the consequences of choice",
+        "She may provide final rewards or become hostile"
+      ],
+      rewards: ["Taker's Cameo", "Tanith's Set", "Complete questline"]
+    }
+  ];
+
+  // Questline data for Latenna the Albinauric
+  const latennaQuestline = [
+    {
+      step: 1,
+      title: "First Meeting",
+      location: "Lakeside Crystal Cave, Liurnia",
+      description: "Find Latenna in the Lakeside Crystal Cave",
+      details: [
+        "Latenna is found in the Lakeside Crystal Cave in Liurnia",
+        "She's an Albinauric who has been captured and imprisoned",
+        "She's guarded by wolves and needs help to escape",
+        "She explains her connection to the Haligtree and her people"
+      ],
+      rewards: ["Latenna's introduction", "Understanding of Albinaurics", "Access to her questline"]
+    },
+    {
+      step: 2,
+      title: "Rescuing Latenna",
+      location: "Lakeside Crystal Cave, Liurnia",
+      description: "Help Latenna escape from her captors",
+      details: [
+        "Defeat the wolves guarding Latenna",
+        "Free her from her imprisonment",
+        "She explains her mission to reach the Haligtree",
+        "She asks for your help to complete her journey"
+      ],
+      rewards: ["Latenna's freedom", "Her gratitude", "Understanding of her mission"]
+    },
+    {
+      step: 3,
+      title: "Latenna's Request",
+      location: "Lakeside Crystal Cave, Liurnia",
+      description: "Learn about Latenna's quest",
+      details: [
+        "Latenna explains her connection to the Haligtree",
+        "She needs to reach the Haligtree to help her people",
+        "She asks you to help her find the Haligtree Secret Medallion",
+        "This medallion is required to access the Haligtree"
+      ],
+      rewards: ["Understanding of Haligtree", "Quest objective", "Latenna's trust"]
+    },
+    {
+      step: 4,
+      title: "Finding the Medallion",
+      location: "Village of the Albinaurics, Liurnia",
+      description: "Search for the Haligtree Secret Medallion",
+      details: [
+        "The Haligtree Secret Medallion is found in the Village of the Albinaurics",
+        "This village is home to other Albinaurics",
+        "The medallion is hidden and requires exploration to find",
+        "This connects to the larger Albinauric storyline"
+      ],
+      rewards: ["Haligtree Secret Medallion", "Access to Haligtree", "Progress in questline"]
+    },
+    {
+      step: 5,
+      title: "Latenna's Spirit Ash",
+      location: "Lakeside Crystal Cave, Liurnia",
+      description: "Latenna becomes a Spirit Ash",
+      details: [
+        "After helping Latenna, she becomes a Spirit Ash",
+        "She can be summoned to help in combat",
+        "She's a powerful archer spirit summon",
+        "She continues to serve you as a companion"
+      ],
+      rewards: ["Latenna the Albinauric Spirit Ash", "Powerful spirit summon", "Companion for battles"]
+    },
+    {
+      step: 6,
+      title: "Haligtree Access",
+      location: "Grand Lift of Rold",
+      description: "Use the medallion to access the Haligtree",
+      details: [
+        "Use the Haligtree Secret Medallion at the Grand Lift of Rold",
+        "This provides access to the secret Haligtree area",
+        "The Haligtree is home to Malenia and other important characters",
+        "This completes Latenna's quest objective"
+      ],
+      rewards: ["Access to Haligtree", "Complete questline", "Access to Malenia"]
+    }
+  ];
+
+  // Questline data for Needle Knight Leda
+  const ledaQuestline = [
+    {
+      step: 1,
+      title: "First Meeting",
+      location: "Gravesite Plain, Shadow Realm",
+      description: "Meet Needle Knight Leda in the Gravesite Plain",
+      details: [
+        "Leda is found in the Gravesite Plain after entering the Shadow Realm",
+        "She's the primary guide for the DLC content",
+        "She explains the new mechanics including Scadu Altus",
+        "She provides guidance on navigating the Shadow Realm"
+      ],
+      rewards: ["DLC guidance", "Understanding of Shadow Realm mechanics", "Access to main DLC questline"]
+    },
+    {
+      step: 2,
+      title: "Shadow Realm Navigation",
+      location: "Gravesite Plain",
+      description: "Learn to navigate the Shadow Realm with Leda's guidance",
+      details: [
+        "Leda teaches you about the Shadow Realm's unique properties",
+        "She explains the Scadu Altus upgrade system",
+        "She guides you to important locations and Sites of Grace",
+        "She helps you understand the new enemy types"
+      ],
+      rewards: ["Shadow Realm knowledge", "Scadu Altus understanding", "Navigation assistance"]
+    },
+    {
+      step: 3,
+      title: "Scadu Altus Plateau",
+      location: "Scadu Altus Plateau",
+      description: "Progress to the Scadu Altus Plateau with Leda's help",
+      details: [
+        "Leda guides you through the more challenging areas",
+        "She helps you find the Shadow Keep",
+        "She provides advice on dealing with advanced enemies",
+        "She prepares you for the path to Messmer"
+      ],
+      rewards: ["Advanced area access", "Shadow Keep location", "Preparation for Messmer"]
+    },
+    {
+      step: 4,
+      title: "Shadow Keep Infiltration",
+      location: "Shadow Keep",
+      description: "Navigate the Shadow Keep with Leda's guidance",
+      details: [
+        "Leda helps you understand the Shadow Keep's layout",
+        "She provides advice on dealing with powerful enemies",
+        "She guides you to valuable loot and upgrades",
+        "She prepares you for the final challenge"
+      ],
+      rewards: ["Shadow Keep navigation", "Valuable loot locations", "Preparation for final boss"]
+    },
+    {
+      step: 5,
+      title: "Messmer the Impaler",
+      location: "Shadow Keep",
+      description: "Face Messmer the Impaler with Leda's support",
+      details: [
+        "Leda provides crucial information about Messmer",
+        "She explains his attack patterns and weaknesses",
+        "She offers strategies for the difficult boss fight",
+        "She supports you through the ultimate DLC challenge"
+      ],
+      rewards: ["Messmer strategies", "Boss fight preparation", "DLC completion guidance"]
+    },
+    {
+      step: 6,
+      title: "DLC Conclusion",
+      location: "Shadow Realm",
+      description: "Complete the DLC with Leda's guidance",
+      details: [
+        "Leda helps you understand the DLC's conclusion",
+        "She provides insights into the story revelations",
+        "She guides you to final rewards and endings",
+        "She completes her role as your DLC guide"
+      ],
+      rewards: ["DLC completion", "Story understanding", "Final rewards", "Leda's Rune"]
+    }
+  ];
+
+  // Questline data for Hornsent
+  const hornsentQuestline = [
+    {
+      step: 1,
+      title: "First Encounter",
+      location: "Shadow Realm",
+      description: "Meet Hornsent in the Shadow Realm",
+      details: [
+        "Hornsent is found in the Shadow Realm",
+        "He's a native warrior with a tragic past",
+        "He has deep knowledge of the realm's history",
+        "He's initially wary but can become an ally"
+      ],
+      rewards: ["Shadow Realm lore", "Hornsent's introduction", "Access to his questline"]
+    },
+    {
+      step: 2,
+      title: "Shadow Realm History",
+      location: "Shadow Realm",
+      description: "Learn about the Shadow Realm's history from Hornsent",
+      details: [
+        "Hornsent reveals the realm's tragic past",
+        "He explains the connection to Messmer",
+        "He shares knowledge about ancient conflicts",
+        "He provides context for the DLC's events"
+      ],
+      rewards: ["Historical knowledge", "Lore insights", "Understanding of DLC context"]
+    },
+    {
+      step: 3,
+      title: "Hornsent's Quest",
+      location: "Shadow Realm",
+      description: "Help Hornsent with his personal quest",
+      details: [
+        "Hornsent asks for help with a personal matter",
+        "He seeks to resolve his tragic past",
+        "He may need assistance with enemies or items",
+        "His quest reveals more about the realm's secrets"
+      ],
+      rewards: ["Hornsent's trust", "Additional lore", "Quest progression"]
+    },
+    {
+      step: 4,
+      title: "Hornsent's Resolution",
+      location: "Shadow Realm",
+      description: "Help Hornsent find resolution for his past",
+      details: [
+        "Hornsent confronts his tragic history",
+        "He may need to face old enemies or memories",
+        "He seeks closure for his people's suffering",
+        "His resolution provides valuable insights"
+      ],
+      rewards: ["Hornsent's Armor Set", "Hornsent's Weapons", "Shadow Realm knowledge"]
+    }
+  ];
+
+  // Questline data for Count Ymir
+  const ymirQuestline = [
+    {
+      step: 1,
+      title: "First Meeting",
+      location: "Shadow Realm",
+      description: "Meet Count Ymir in the Shadow Realm",
+      details: [
+        "Count Ymir is found in the Shadow Realm",
+        "He's a prophetic figure with deep knowledge",
+        "He speaks in riddles and prophecies",
+        "He has insights about Messmer and the realm's purpose"
+      ],
+      rewards: ["Prophetic knowledge", "Ymir's introduction", "Access to his questline"]
+    },
+    {
+      step: 2,
+      title: "Ancient Prophecies",
+      location: "Shadow Realm",
+      description: "Learn about ancient prophecies from Count Ymir",
+      details: [
+        "Ymir reveals ancient prophecies about the Shadow Realm",
+        "He explains the true nature of Messmer",
+        "He shares insights about the realm's purpose",
+        "His prophecies provide crucial story context"
+      ],
+      rewards: ["Prophetic insights", "Story revelations", "Understanding of Messmer"]
+    },
+    {
+      step: 3,
+      title: "Ymir's Research",
+      location: "Shadow Realm",
+      description: "Help Count Ymir with his research into the realm's secrets",
+      details: [
+        "Ymir asks for help gathering ancient knowledge",
+        "He may need specific items or information",
+        "His research reveals deeper mysteries",
+        "He uncovers secrets about the realm's creation"
+      ],
+      rewards: ["Ancient knowledge", "Research assistance", "Deeper lore understanding"]
+    },
+    {
+      step: 4,
+      title: "Shadow Realm Secrets",
+      location: "Shadow Realm",
+      description: "Uncover the Shadow Realm's deepest secrets with Ymir",
+      details: [
+        "Ymir reveals the realm's ultimate purpose",
+        "He explains the connection to the main game",
+        "He provides insights into the DLC's ending",
+        "His knowledge is crucial for understanding the story"
+      ],
+      rewards: ["Ymir's Armor Set", "Prophet's Staff", "Ymir's Bell Bearing", "Shadow Realm secrets"]
+    }
+  ];
+
   const getQuestlineData = (npcId) => {
     switch (npcId) {
       case 'varre':
@@ -880,6 +1510,22 @@ export default function NPCQuestline({ npcId }) {
         return millicentQuestline;
       case 'gurranq':
         return gurranqQuestline;
+      case 'dung-eater':
+        return dungEaterQuestline;
+      case 'fia':
+        return fiaQuestline;
+      case 'bernahl':
+        return bernahlQuestline;
+      case 'tanith':
+        return tanithQuestline;
+      case 'latenna':
+        return latennaQuestline;
+      case 'needle-knight-leda':
+        return ledaQuestline;
+      case 'hornsent':
+        return hornsentQuestline;
+      case 'count-ymir':
+        return ymirQuestline;
       default:
         return [];
     }
