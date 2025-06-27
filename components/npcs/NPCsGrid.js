@@ -1,87 +1,22 @@
+'use client';
+
 import Link from 'next/link';
-import { Users, MapPin, Gift, CheckCircle } from 'lucide-react';
+import { useState } from 'react';
+import { Users, MapPin, Gift, CheckCircle, Filter, ChevronDown } from 'lucide-react';
+import { npcData } from '@/lib/data/npcData';
 
 export default function NPCsGrid() {
-  const npcs = [
-    {
-      id: 'ranni',
-      name: 'Ranni the Witch',
-      title: 'The Lunar Princess',
-      location: 'Ranni\'s Rise',
-      questLength: 'Long',
-      rewards: ['Dark Moon Greatsword', 'Age of the Stars Ending'],
-      status: 'Essential',
-      description: 'One of the most important questlines, leading to a unique ending',
-      image: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600',
-      expansion: 'Base Game',
-      difficulty: 'Complex',
-    },
-    {
-      id: 'fia',
-      name: 'Fia, Deathbed Companion',
-      title: 'The Deathbed Companion',
-      location: 'Roundtable Hold',
-      questLength: 'Medium',
-      rewards: ['Mending Rune of the Death-Prince', 'Age of Duskborn Ending'],
-      status: 'Essential',
-      description: 'A questline that explores the nature of death and rebirth',
-      image: 'https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&w=600',
-      expansion: 'Base Game',
-      difficulty: 'Moderate',
-    },
-    {
-      id: 'alexander',
-      name: 'Iron Fist Alexander',
-      title: 'The Warrior Jar',
-      location: 'Stormhill',
-      questLength: 'Long',
-      rewards: ['Alexander\'s Innards', 'Shard of Alexander'],
-      status: 'Optional',
-      description: 'Follow the journey of a warrior jar seeking to become stronger',
-      image: 'https://images.pexels.com/photos/1624438/pexels-photo-1624438.jpeg?auto=compress&cs=tinysrgb&w=600',
-      expansion: 'Base Game',
-      difficulty: 'Easy',
-    },
-    {
-      id: 'varre',
-      name: 'White Mask Varré',
-      title: 'The War Surgeon',
-      location: 'The First Step',
-      questLength: 'Medium',
-      rewards: ['Pureblood Knight\'s Medal', 'Varré\'s Bouquet'],
-      status: 'Important',
-      description: 'Early access to Mohgwyn Palace and valuable rewards',
-      image: 'https://images.pexels.com/photos/163064/play-stone-the-dove-ancient-163064.jpeg?auto=compress&cs=tinysrgb&w=600',
-      expansion: 'Base Game',
-      difficulty: 'Easy',
-    },
-    {
-      id: 'millicent',
-      name: 'Millicent',
-      title: 'The Scarlet Bloom',
-      location: 'Caelid',
-      questLength: 'Long',
-      rewards: ['Millicent\'s Prosthesis', 'Rotten Winged Sword Insignia'],
-      status: 'Optional',
-      description: 'A touching story of identity and self-discovery',
-      image: 'https://images.pexels.com/photos/1029604/pexels-photo-1029604.jpeg?auto=compress&cs=tinysrgb&w=600',
-      expansion: 'Base Game',
-      difficulty: 'Moderate',
-    },
-    {
-      id: 'needle-knight-leda',
-      name: 'Needle Knight Leda',
-      title: 'The Needle Knight',
-      location: 'Mohgwyn Palace',
-      questLength: 'Long',
-      rewards: ['Leda\'s Rune', 'Needle Knight Badge'],
-      status: 'Essential',
-      description: 'Key questline for Shadow of the Erdtree progression',
-      image: 'https://images.pexels.com/photos/2832432/pexels-photo-2832432.jpeg?auto=compress&cs=tinysrgb&w=600',
-      expansion: 'Shadow of the Erdtree',
-      difficulty: 'Complex',
-    },
-  ];
+  const [selectedExpansion, setSelectedExpansion] = useState('All');
+  const [selectedStatus, setSelectedStatus] = useState('All');
+  const [selectedStoryline, setSelectedStoryline] = useState('All');
+
+  // Filter NPCs based on selected criteria
+  const filteredNPCs = npcData.filter(npc => {
+    const expansionMatch = selectedExpansion === 'All' || npc.expansion === selectedExpansion;
+    const statusMatch = selectedStatus === 'All' || npc.status === selectedStatus;
+    const storylineMatch = selectedStoryline === 'All' || npc.storyline === selectedStoryline;
+    return expansionMatch && statusMatch && storylineMatch;
+  }).sort((a, b) => a.order - b.order);
 
   const getStatusColor = (status) => {
     const colors = {
@@ -97,6 +32,7 @@ export default function NPCsGrid() {
       Easy: 'text-green-400',
       Moderate: 'text-yellow-400',
       Complex: 'text-red-400',
+      Automatic: 'text-blue-400',
     };
     return colors[difficulty] || colors.Easy;
   };
@@ -106,6 +42,7 @@ export default function NPCsGrid() {
       Short: 'text-green-400',
       Medium: 'text-yellow-400',
       Long: 'text-red-400',
+      Automatic: 'text-blue-400',
     };
     return colors[length] || colors.Short;
   };
@@ -114,6 +51,22 @@ export default function NPCsGrid() {
     return expansion === 'Shadow of the Erdtree' 
       ? 'bg-shadow-600 text-white' 
       : 'bg-elden-600 text-white';
+  };
+
+  const getStorylineColor = (storyline) => {
+    const colors = {
+      'Early Game': 'bg-green-600/20 text-green-400',
+      'Main Story': 'bg-red-600/20 text-red-400',
+      'Ranni Questline': 'bg-blue-600/20 text-blue-400',
+      'Companion Quest': 'bg-purple-600/20 text-purple-400',
+      'Side Quest': 'bg-yellow-600/20 text-yellow-400',
+      'Magic Questline': 'bg-cyan-600/20 text-cyan-400',
+      'Faith Questline': 'bg-orange-600/20 text-orange-400',
+      'Volcano Manor': 'bg-red-600/20 text-red-400',
+      'Frenzied Flame': 'bg-red-600/20 text-red-400',
+      'Shadow of the Erdtree': 'bg-shadow-600/20 text-shadow-400',
+    };
+    return colors[storyline] || 'bg-slate-600/20 text-slate-400';
   };
 
   return (
@@ -127,8 +80,57 @@ export default function NPCsGrid() {
         </p>
       </div>
 
+      {/* Filters */}
+      <div className="content-card mb-6">
+        <div className="flex flex-wrap gap-4 items-center">
+          <div className="flex items-center gap-2">
+            <Filter className="w-4 h-4 text-slate-400" />
+            <span className="text-sm font-semibold text-slate-300">Filters:</span>
+          </div>
+          
+          <select
+            value={selectedExpansion}
+            onChange={(e) => setSelectedExpansion(e.target.value)}
+            className="bg-elden-800 border border-elden-600 text-white rounded px-3 py-1 text-sm"
+          >
+            <option value="All">All Expansions</option>
+            <option value="Base Game">Base Game</option>
+            <option value="Shadow of the Erdtree">Shadow of the Erdtree</option>
+          </select>
+
+          <select
+            value={selectedStatus}
+            onChange={(e) => setSelectedStatus(e.target.value)}
+            className="bg-elden-800 border border-elden-600 text-white rounded px-3 py-1 text-sm"
+          >
+            <option value="All">All Status</option>
+            <option value="Essential">Essential</option>
+            <option value="Important">Important</option>
+            <option value="Optional">Optional</option>
+          </select>
+
+          <select
+            value={selectedStoryline}
+            onChange={(e) => setSelectedStoryline(e.target.value)}
+            className="bg-elden-800 border border-elden-600 text-white rounded px-3 py-1 text-sm"
+          >
+            <option value="All">All Storylines</option>
+            <option value="Early Game">Early Game</option>
+            <option value="Main Story">Main Story</option>
+            <option value="Ranni Questline">Ranni Questline</option>
+            <option value="Companion Quest">Companion Quest</option>
+            <option value="Side Quest">Side Quest</option>
+            <option value="Magic Questline">Magic Questline</option>
+            <option value="Faith Questline">Faith Questline</option>
+            <option value="Volcano Manor">Volcano Manor</option>
+            <option value="Frenzied Flame">Frenzied Flame</option>
+            <option value="Shadow of the Erdtree">Shadow of the Erdtree</option>
+          </select>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {npcs.map((npc) => (
+        {filteredNPCs.map((npc) => (
           <Link
             key={npc.id}
             href={`/npcs/${npc.id}`}
@@ -165,6 +167,12 @@ export default function NPCsGrid() {
               <p className="text-slate-400 text-sm mb-4">
                 {npc.description}
               </p>
+
+              <div className="mb-3">
+                <span className={`text-xs px-2 py-1 rounded ${getStorylineColor(npc.storyline)}`}>
+                  {npc.storyline}
+                </span>
+              </div>
 
               <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
                 <div>
@@ -217,6 +225,12 @@ export default function NPCsGrid() {
           </Link>
         ))}
       </div>
+
+      {filteredNPCs.length === 0 && (
+        <div className="content-card p-8 text-center">
+          <p className="text-slate-400">No NPCs match the selected filters.</p>
+        </div>
+      )}
 
       <div className="mt-12 text-center">
         <div className="content-card p-6 rounded-xl max-w-2xl mx-auto">
