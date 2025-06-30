@@ -1,8 +1,26 @@
+'use client';
+
 import Link from 'next/link';
 import { MapPin, Clock, Star } from 'lucide-react';
+import { useState } from 'react';
+import RegionDetailModal from './RegionDetailModal';
 
 export default function RegionsGrid() {
+  const [selectedRegion, setSelectedRegion] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleRegionClick = (region) => {
+    setSelectedRegion(region);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedRegion(null);
+  };
+
   const regions = [
+    // Base Game Regions - Early Game
     {
       id: 'limgrave',
       name: 'Limgrave',
@@ -12,6 +30,17 @@ export default function RegionsGrid() {
       mainBosses: ['Margit', 'Godrick'],
       keyFeatures: ['Tutorial Area', 'Stormveil Castle', 'First Legacy Dungeon'],
       image: 'https://images.pexels.com/photos/1029604/pexels-photo-1029604.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Base Game',
+    },
+    {
+      id: 'weeping-peninsula',
+      name: 'Weeping Peninsula',
+      description: 'Southern peninsula with Castle Morne and beginner-friendly content',
+      difficulty: 'Beginner',
+      estimatedTime: '3-5 hours',
+      mainBosses: ['Leonine Misbegotten'],
+      keyFeatures: ['Castle Morne', 'Bridge of Sacrifice', 'Irina\'s Quest'],
+      image: 'https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&w=600',
       expansion: 'Base Game',
     },
     {
@@ -48,6 +77,28 @@ export default function RegionsGrid() {
       expansion: 'Base Game',
     },
     {
+      id: 'mt-gelmir',
+      name: 'Mt. Gelmir',
+      description: 'Volcanic region home to Volcano Manor and Rykard',
+      difficulty: 'Advanced',
+      estimatedTime: '6-10 hours',
+      mainBosses: ['Rykard', 'Godskin Noble'],
+      keyFeatures: ['Volcano Manor', 'Gelmir Hero\'s Grave', 'Recusant Questline'],
+      image: 'https://images.pexels.com/photos/1438761/pexels-photo-1438761.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Base Game',
+    },
+    {
+      id: 'leyndell',
+      name: 'Leyndell, Royal Capital',
+      description: 'The grand capital city of the Lands Between',
+      difficulty: 'Expert',
+      estimatedTime: '8-12 hours',
+      mainBosses: ['Morgott', 'Godfrey'],
+      keyFeatures: ['Royal Capital', 'Erdtree', 'Golden Order'],
+      image: 'https://images.pexels.com/photos/1438761/pexels-photo-1438761.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Base Game',
+    },
+    {
       id: 'mountaintops',
       name: 'Mountaintops of the Giants',
       description: 'Frozen peaks where giants once roamed',
@@ -59,13 +110,158 @@ export default function RegionsGrid() {
       expansion: 'Base Game',
     },
     {
-      id: 'shadow-realm',
-      name: 'Realm of Shadow',
-      description: 'The shadow realm revealed in the DLC',
+      id: 'crumbling-farum-azula',
+      name: 'Crumbling Farum Azula',
+      description: 'Ancient floating ruins where time stands still',
       difficulty: 'Expert',
-      estimatedTime: '25-35 hours',
-      mainBosses: ['Messmer', 'Radahn (Consort)', 'Scadutree Avatar'],
-      keyFeatures: ['Gravesite Plain', 'Shadow Keep', 'Abyssal Woods'],
+      estimatedTime: '4-6 hours',
+      mainBosses: ['Maliketh', 'Dragonlord Placidusax'],
+      keyFeatures: ['Ancient Ruins', 'Beast Clergyman', 'Destined Death'],
+      image: 'https://images.pexels.com/photos/3408353/pexels-photo-3408353.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Base Game',
+    },
+    {
+      id: 'haligtree',
+      name: 'Miquella\'s Haligtree',
+      description: 'Secret endgame area home to Malenia',
+      difficulty: 'Expert',
+      estimatedTime: '4-6 hours',
+      mainBosses: ['Malenia', 'Loretta'],
+      keyFeatures: ['Haligtree', 'Elphael', 'Malenia\'s Arena'],
+      image: 'https://images.pexels.com/photos/3408353/pexels-photo-3408353.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Base Game',
+    },
+    // Underground Areas
+    {
+      id: 'siofra-river',
+      name: 'Siofra River',
+      description: 'Underground river with ancient ruins and ancestors',
+      difficulty: 'Intermediate',
+      estimatedTime: '3-5 hours',
+      mainBosses: ['Ancestor Spirit'],
+      keyFeatures: ['Underground River', 'Ancestral Followers', 'Wells'],
+      image: 'https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Base Game',
+    },
+    {
+      id: 'ainsel-river',
+      name: 'Ainsel River',
+      description: 'Underground river with dragonkin and astel',
+      difficulty: 'Advanced',
+      estimatedTime: '3-5 hours',
+      mainBosses: ['Astel', 'Dragonkin Soldier'],
+      keyFeatures: ['Underground River', 'Astel Arena', 'Dragonkin'],
+      image: 'https://images.pexels.com/photos/1624438/pexels-photo-1624438.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Base Game',
+    },
+    {
+      id: 'nokron',
+      name: 'Nokron, Eternal City',
+      description: 'Underground eternal city accessed after Radahn',
+      difficulty: 'Advanced',
+      estimatedTime: '4-6 hours',
+      mainBosses: ['Mimic Tear', 'Valiant Gargoyles'],
+      keyFeatures: ['Eternal City', 'Fingerslayer Blade', 'Ranni Quest'],
+      image: 'https://images.pexels.com/photos/1624438/pexels-photo-1624438.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Base Game',
+    },
+    {
+      id: 'nokstella',
+      name: 'Nokstella, Eternal City',
+      description: 'Connected to Nokron with more eternal city content',
+      difficulty: 'Advanced',
+      estimatedTime: '3-4 hours',
+      mainBosses: ['Baleful Shadow'],
+      keyFeatures: ['Eternal City', 'Nokstella Waterfall', 'Ranni Quest'],
+      image: 'https://images.pexels.com/photos/1624438/pexels-photo-1624438.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Base Game',
+    },
+    {
+      id: 'deeproot-depths',
+      name: 'Deeproot Depths',
+      description: 'Deep underground area with deathroot and fia',
+      difficulty: 'Advanced',
+      estimatedTime: '3-5 hours',
+      mainBosses: ['Fia\'s Champions', 'Lichdragon Fortissax'],
+      keyFeatures: ['Deathroot', 'Fia Quest', 'Underground'],
+      image: 'https://images.pexels.com/photos/1624438/pexels-photo-1624438.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Base Game',
+    },
+    {
+      id: 'lake-of-rot',
+      name: 'Lake of Rot',
+      description: 'Toxic lake area with scarlet rot and astel',
+      difficulty: 'Advanced',
+      estimatedTime: '2-3 hours',
+      mainBosses: ['Astel, Naturalborn of the Void'],
+      keyFeatures: ['Scarlet Rot', 'Astel Boss', 'Ranni Quest'],
+      image: 'https://images.pexels.com/photos/1624438/pexels-photo-1624438.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Base Game',
+    },
+    {
+      id: 'mohgwyn-palace',
+      name: 'Mohgwyn Palace',
+      description: 'Underground palace home to Mohg and albinaurics',
+      difficulty: 'Expert',
+      estimatedTime: '3-5 hours',
+      mainBosses: ['Mohg', 'White Mask Varré'],
+      keyFeatures: ['Mohgwyn Palace', 'Albinaurics', 'Blood Dynasty'],
+      image: 'https://images.pexels.com/photos/1624438/pexels-photo-1624438.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Base Game',
+    },
+    // DLC Regions
+    {
+      id: 'gravesite-plain',
+      name: 'Gravesite Plain',
+      description: 'First major area of the Shadow Realm with new mechanics and enemies',
+      difficulty: 'Expert',
+      estimatedTime: '3-6 hours',
+      mainBosses: ['Belurat Tower Settlement Boss', 'Castle Ensis Boss'],
+      keyFeatures: ['Shadow Realm Entry', 'Scadu Altus System', 'Needle Knight Leda'],
+      image: 'https://images.pexels.com/photos/2832432/pexels-photo-2832432.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Shadow of the Erdtree',
+    },
+    {
+      id: 'scadu-altus-plateau',
+      name: 'Scadu Altus Plateau',
+      description: 'Advanced DLC area with tougher enemies and path to Shadow Keep',
+      difficulty: 'Expert',
+      estimatedTime: '4-8 hours',
+      mainBosses: ['Scadu Altus Boss', 'Advanced Shadow Enemies'],
+      keyFeatures: ['Advanced Shadow Realm', 'Shadow Keep Access', 'Enhanced Scadu Altus'],
+      image: 'https://images.pexels.com/photos/2832432/pexels-photo-2832432.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Shadow of the Erdtree',
+    },
+    {
+      id: 'shadow-keep',
+      name: 'Shadow Keep',
+      description: 'Main DLC dungeon and Messmer\'s domain with legendary loot',
+      difficulty: 'Expert',
+      estimatedTime: '3-5 hours',
+      mainBosses: ['Shadow Keep Boss', 'Messmer the Impaler'],
+      keyFeatures: ['Main DLC Dungeon', 'Messmer\'s Domain', 'Legendary Loot'],
+      image: 'https://images.pexels.com/photos/2832432/pexels-photo-2832432.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Shadow of the Erdtree',
+    },
+    {
+      id: 'abyssal-woods',
+      name: 'Abyssal Woods',
+      description: 'Dark forest area with unique shadow mechanics and secrets',
+      difficulty: 'Expert',
+      estimatedTime: '2-4 hours',
+      mainBosses: ['Abyssal Woods Boss', 'Shadow Creatures'],
+      keyFeatures: ['Dark Forest', 'Shadow Mechanics', 'Hidden Secrets'],
+      image: 'https://images.pexels.com/photos/2832432/pexels-photo-2832432.jpeg?auto=compress&cs=tinysrgb&w=600',
+      expansion: 'Shadow of the Erdtree',
+    },
+    {
+      id: 'shadow-realm-final',
+      name: 'Final Shadow Areas',
+      description: 'Ultimate DLC challenges and conclusion of the Shadow Realm story',
+      difficulty: 'Expert',
+      estimatedTime: '2-4 hours',
+      mainBosses: ['Final DLC Bosses', 'Ultimate Shadow Challenges'],
+      keyFeatures: ['DLC Conclusion', 'Ultimate Challenges', 'Story Finale'],
       image: 'https://images.pexels.com/photos/2832432/pexels-photo-2832432.jpeg?auto=compress&cs=tinysrgb&w=600',
       expansion: 'Shadow of the Erdtree',
     },
@@ -110,17 +306,16 @@ export default function RegionsGrid() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {regions.map((region) => (
-          <Link
+          <div
             key={region.id}
-            href={`/regions/${region.id}`}
-            className="content-card rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 group"
+            className="content-card rounded-xl overflow-hidden group"
           >
             <div className="relative">
               <div className="aspect-video overflow-hidden">
                 <img
                   src={region.image}
                   alt={region.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -176,7 +371,7 @@ export default function RegionsGrid() {
                 </div>
               </div>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
 
@@ -189,6 +384,13 @@ export default function RegionsGrid() {
           </p>
         </div>
       </div>
+
+      {/* Region Detail Modal */}
+      <RegionDetailModal
+        region={selectedRegion}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </div>
   );
 }

@@ -53,17 +53,16 @@ export default function BossesGrid() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {bosses.map((boss) => (
-          <Link
+          <div
             key={boss.id}
-            href={`/bosses/${boss.id}`}
-            className="content-card rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 group"
+            className="content-card rounded-xl overflow-hidden group"
           >
             <div className="relative">
               <div className="aspect-video overflow-hidden">
                 <img
                   src={boss.image || 'https://images.pexels.com/photos/163064/play-stone-the-dove-ancient-163064.jpeg?auto=compress&cs=tinysrgb&w=600'}
                   alt={boss.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -142,14 +141,14 @@ export default function BossesGrid() {
               <div className="mt-4 pt-4 border-t border-elden-600/30">
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-slate-500">Strategy Guide</span>
-                  <span className="text-erdtree-400 group-hover:text-erdtree-300 flex items-center gap-1">
+                  <span className="text-erdtree-400 flex items-center gap-1">
                     View Guide
                     <Sword className="w-3 h-3" />
                   </span>
                 </div>
               </div>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
 
